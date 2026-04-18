@@ -11,35 +11,35 @@ body {
   height: 100vh;
   font-family: Arial, sans-serif;
   color: white;
+
+  /* YOUR BANNER AS BACKGROUND */
+  background: url("Untitled design (2).png") no-repeat center center/cover;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at center, #1e73e8, #0b1c3a);
-  overflow: hidden;
 }
 
-/* glow effect */
-body::before {
-  content: "";
+/* dark overlay so text is readable */
+.overlay {
   position: absolute;
-  width: 700px;
-  height: 700px;
-  background: #ffffff;
-  filter: blur(180px);
-  opacity: 0.08;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
 }
 
-/* container */
+/* content */
 .container {
+  position: relative;
   text-align: center;
   z-index: 1;
 }
 
 /* logo */
 .logo {
-  width: 120px;
+  width: 140px;
   margin-bottom: 20px;
-  filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+  filter: drop-shadow(0 0 20px rgba(255,255,255,0.4));
 }
 
 /* title */
@@ -50,7 +50,7 @@ h1 {
 
 /* subtitle */
 p {
-  color: #d0d0d0;
+  color: #ddd;
   margin-bottom: 40px;
 }
 
@@ -63,27 +63,21 @@ p {
 }
 
 .box {
-  width: 120px;
-  height: 120px;
-  border-radius: 15px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
+  width: 110px;
+  height: 110px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: 0.3s;
-}
-
-.box:hover {
-  transform: translateY(-5px);
-  border-color: white;
 }
 
 .box h2 {
-  font-size: 36px;
   margin: 0;
+  font-size: 34px;
 }
 
 .box span {
@@ -96,12 +90,16 @@ p {
 
 <body>
 
+<div class="overlay"></div>
+
 <div class="container">
+  <!-- CENTER LOGO -->
   <img src="Untitled design (1).png" class="logo" alt="Flyer Logo">
 
   <h1>Flyer</h1>
-  <p>We're launching something fast. Stay tuned.</p>
+  <p>Flyer Discord Management launching soon.</p>
 
+  <!-- COUNTDOWN -->
   <div class="countdown">
     <div class="box">
       <h2 id="days">00</h2>
@@ -123,27 +121,25 @@ p {
 </div>
 
 <script>
-// AUTO SET: 2 weeks from now
+// 2 week countdown
 const launchDate = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
 
-const timer = setInterval(() => {
+setInterval(() => {
   const now = new Date().getTime();
   const distance = launchDate - now;
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((distance / (1000 * 60)) % 60);
-  const seconds = Math.floor((distance / 1000) % 60);
+  document.getElementById("days").innerText =
+    String(Math.floor(distance / (1000*60*60*24))).padStart(2,'0');
 
-  document.getElementById("days").innerText = String(days).padStart(2, '0');
-  document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-  document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-  document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+  document.getElementById("hours").innerText =
+    String(Math.floor((distance / (1000*60*60)) % 24)).padStart(2,'0');
 
-  if (distance < 0) {
-    clearInterval(timer);
-    document.querySelector(".countdown").innerHTML = "🚀 We are live!";
-  }
+  document.getElementById("minutes").innerText =
+    String(Math.floor((distance / (1000*60)) % 60)).padStart(2,'0');
+
+  document.getElementById("seconds").innerText =
+    String(Math.floor((distance / 1000) % 60)).padStart(2,'0');
+
 }, 1000);
 </script>
 
