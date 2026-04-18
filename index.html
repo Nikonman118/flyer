@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coming Soon</title>
+<title>Flyer - Coming Soon</title>
 
 <style>
 body {
@@ -14,67 +14,71 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at center, #0a2a2f, #02090d);
+  background: radial-gradient(circle at center, #1e73e8, #0b1c3a);
   overflow: hidden;
 }
 
-/* Blur glow background */
+/* glow effect */
 body::before {
   content: "";
   position: absolute;
-  width: 600px;
-  height: 600px;
-  background: #00ffb3;
-  filter: blur(200px);
-  opacity: 0.2;
+  width: 700px;
+  height: 700px;
+  background: #ffffff;
+  filter: blur(180px);
+  opacity: 0.08;
 }
 
-/* Center content */
+/* container */
 .container {
   text-align: center;
   z-index: 1;
 }
 
-/* Logo */
+/* logo */
 .logo {
-  font-size: 60px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  width: 120px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
 }
 
-.logo span {
-  color: #00ffb3;
-}
-
-/* Title */
+/* title */
 h1 {
   font-size: 48px;
   margin: 10px 0;
 }
 
-/* Subtitle */
+/* subtitle */
 p {
-  color: #aaa;
+  color: #d0d0d0;
   margin-bottom: 40px;
 }
 
-/* Countdown boxes */
+/* countdown */
 .countdown {
   display: flex;
   gap: 20px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .box {
   width: 120px;
   height: 120px;
   border-radius: 15px;
-  border: 1px solid rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: 0.3s;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  border-color: white;
 }
 
 .box h2 {
@@ -84,8 +88,8 @@ p {
 
 .box span {
   font-size: 12px;
-  color: #bbb;
   letter-spacing: 2px;
+  color: #ccc;
 }
 </style>
 </head>
@@ -93,9 +97,10 @@ p {
 <body>
 
 <div class="container">
-  <div class="logo"><span>M</span></div>
-  <h1>MintHost</h1>
-  <p>Fast and powerful hosting is coming soon.</p>
+  <img src="Untitled design (1).png" class="logo" alt="Flyer Logo">
+
+  <h1>Flyer</h1>
+  <p>We're launching something fast. Stay tuned.</p>
 
   <div class="countdown">
     <div class="box">
@@ -118,8 +123,8 @@ p {
 </div>
 
 <script>
-// SET YOUR LAUNCH DATE HERE
-const launchDate = new Date("2026-05-01T00:00:00").getTime();
+// AUTO SET: 2 weeks from now
+const launchDate = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
 
 const timer = setInterval(() => {
   const now = new Date().getTime();
